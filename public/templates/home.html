@@ -1,0 +1,40 @@
+
+<section class="container m-t-60">
+	<div class="row">
+		<div class="col-sm-8">
+			<div class="review-card wrapper-15" ng-repeat="review in postReviewCtrl.allReviews | orderBy: 'reputation'">
+				<div class="review-head">
+					<img src="{{review.userID.image}}">
+					<p><a href="{{review.userID._id}}">{{review.userID.fullName}}</a> in <a href="{{review.technology.techID}}">{{review.technology.name}}</a></p>
+					<div class="rating-value pull-right">
+						<span class="fa fa-star"></span> {{review.review.rating}}
+					</div>
+				</div>
+				<p class="review-title">{{review.review.title}}</p>
+				<p class="review-body">{{review.review.body}}</p>
+				<p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{review.review.source}}</a></p>
+				<div class="review-footer">
+					<button class="upvote-btn" ng-hide="postReviewCtrl.check(review._id) || postReviewCtrl.checkFlag" ng-click="postReviewCtrl.upvote(review)">Upvote</button>
+					<a href="" class="downvote" ng-hide="postReviewCtrl.check(review._id) || postReviewCtrl.checkFlag" ng-click="postReviewCtrl.downvote(review)">Downvote</a>
+					<p ng-show="postReviewCtrl.check(review._id) || postReviewCtrl.checkFlag" class="msg">Thank you for your vote! Your vote help us to provide more authentic results regarding particular technology.</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="box ff-Open-Sans" ui-sref="results">
+				Generate the summarized result of all technologies displaying their effective rating
+			</div>
+			<div class="box ff-Open-Sans" ui-sref="select_technology">
+				Add more Reviews
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+

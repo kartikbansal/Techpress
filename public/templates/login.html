@@ -1,0 +1,18 @@
+<div class="bg-overlay">
+</div>
+<main class="form-wrapper">
+  <h1 class="logo-text">Techpress</h1>
+  <p class="tagline">write. read. learn</p>
+  <form class="m-t-20 homeSignupForm" ng-submit="authCtrl.logIn()">
+    <a href="" class="fb-login" ng-click="authCtrl.fbLogin()"><span class="fa fa-facebook-official"></span><span>Continue with Facebook</span></a>
+    <p>or Continue with email below</p>
+    <div class="form-group">
+      <input type="email" placeholder="Email" autocomplete="on" required class="m-form-control" ng-model="authCtrl.user.email">
+    </div> 
+    <div class="form-group">
+      <input type="password" placeholder="Password" autocomplete="on" required class="m-form-control" ng-model="authCtrl.user.password">   
+    </div>
+    <button type="submit" class="btn btn-danger">Login</button>
+    <span class="disclaimer">Don't have account? <a href="/#/register">Signup here</a></span>
+  </form>
+</main>

@@ -1,0 +1,16 @@
+<div class="container ff-Open-Sans">
+	<p class="text-center f-s-25 m-b-5 m-t-20">Welcome <strong>{{technologyCtrl.name}}</strong></p>
+	<p class="text-center f-s-16 m-b-5">Add a review here or <a href="#/home">skip</a> to the home page</p>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-3 text-center" ng-repeat="item in technologyCtrl.techItems">
+			<div class="tech-card">
+				<img src="{{item.image}}">
+				<p>{{item.name}}</p>
+				<a href="#/post_review/{{item._id}}" ng-if="!technologyCtrl.check(item.name)">+ Add Review</a>
+				<a ng-if="technologyCtrl.check(item.name)">Added</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+

@@ -1,0 +1,26 @@
+
+<section class="container m-t-60">
+	<div class="row">
+		<div class="col-sm-6 col-sm-offset-3">
+			<div class="o-tech-card" ng-repeat="tech in resultCtrl.allTech">
+				<img src="{{tech.image}}">
+				<p>{{tech.name}}</p>
+				<div class="rating">
+					<span class="fa fa-star"></span> {{tech.reputation == 0? 0 : (tech.reputation/tech.totalWeight | number:2)}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
