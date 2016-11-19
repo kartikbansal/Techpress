@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2">
 			<div class="ff-Open-Sans user-profile">
-				<img src="{{userctrl.userReviews[0].userID.image}}">
+				<img ng-src="{{userctrl.userReviews[0].userID.image}}">
 				<p>{{userctrl.userReviews[0].userID.fullName}}</p>
 				<button class="follow-btn" ng-show="userctrl.currFlag && !userctrl.followFlag" ng-click="userctrl.addFollower(userctrl.userReviews[0].userID._id)">Follow</button>
 				<button class="follow-btn" ng-show="userctrl.currFlag && userctrl.followFlag" ng-click="userctrl.removeFollower(userctrl.userReviews[0].userID._id)">Unfollow</button>
@@ -13,7 +13,7 @@
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2" ng-repeat="user in userctrl.userReviews">
 			<div class="img-block">
-				<img src="{{user.technology.techID.image}}">
+				<img ng-src="{{user.technology.techID.image}}">
 			</div>
 			<div class="review-card wrapper-15 d-inline-block u-review-card">
 				<div class="review-head">

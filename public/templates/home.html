@@ -4,7 +4,7 @@
 		<div class="col-sm-8">
 			<div class="review-card wrapper-15" ng-repeat="review in postReviewCtrl.allReviews | orderBy: 'time'">
 				<div class="review-head">
-					<img src="{{review.userID.image}}">
+					<img ng-src="{{review.userID.image}}">
 					<p><a href="#/user/{{review.userID._id}}">{{review.userID.fullName}}</a> in <a href="#/tech/{{review.technology.techID._id}}">{{review.technology.name}}</a></p>
 					<div class="rating-value pull-right">
 						<span class="fa fa-star"></span> {{review.review.rating}}

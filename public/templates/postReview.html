@@ -1,7 +1,7 @@
 <section class="m-container">
 	<div class="wrapper-25  m-t-50 m-b-50">
 		<div class="tech-intro">
-			<img src="{{postReviewCtrl.techInfo.image}}">
+			<img ng-src="{{postReviewCtrl.techInfo.image}}">
 			<p>{{postReviewCtrl.techInfo.name}}<span>Write your Review</span></p>
 		</div>
 		<form class="review-form" ng-submit="postReviewCtrl.addReview()">

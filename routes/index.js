@@ -5,9 +5,7 @@ var passport = require('passport');
 var jwt = require('express-jwt');
 var config = require('../config/devConfig.js');
 
-var Post = mongoose.model('Post');
 var User = mongoose.model('User');
-var Comment = mongoose.model('Comment');
 var Review = mongoose.model('Review');
 var Technology = mongoose.model('Technology');
 
