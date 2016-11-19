@@ -8,3 +8,5 @@ Then from the terminal visit the folder containing the application and run comma
 After that run 'npm start' and visit 'localhost:3000' on your browser to view the application.
 
 Thank you!
+
+PS: In order to login/signup using facebook create your own application on facebook and then copy and paste the app id in the file angulaApp.js which is located at /public/javascripts 
