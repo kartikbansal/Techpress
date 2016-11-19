@@ -5,15 +5,15 @@ var config = require('../config/devConfig.js');
 
 var UserSchema = new mongoose.Schema({
 	fullName: {type: String, required: true},
-	image: {type: String, default: ''},
+	image: {type: String, default: '/images/default_user.png'},
 	email: {type: String, lowercase: true, unique: true, required: true},
 	hash: String,
 	salt: String,
 	followersCount: {default: 0, type: Number},
-	followeeCount: {default: 0, type: Number},
 	followees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
 	techflag: [String],
-	votedReview: [{type:mongoose.Schema.Types.ObjectId, ref:'Review'}]
+	votedReview: [{type:mongoose.Schema.Types.ObjectId, ref:'Review'}],
+	firstLogin: {type: Boolean, default: true}
 });
 
 UserSchema.methods.setPassword = function(password) {
@@ -35,9 +35,19 @@ UserSchema.methods.generateJWT = function() {
 		_id: this._id,
 		email: this.email,
 		name: this.fullName.split(' ')[0],
+		firstLogin: this.firstLogin,
 		exp: parseInt(exp.getTime() / 1000)
 	}, config.secret_key);
 };
 
+UserSchema.methods.follow = function(cb) {
+	this.followersCount += 1;
+	this.save(cb);
+}
+
+UserSchema.methods.unfollow = function(cb) {
+	this.followersCount -= 1;
+	this.save(cb);
+}
 
 module.exports = UserSchema;

@@ -1,8 +1,8 @@
 
 <section class="container m-t-60">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<div class="o-tech-card" ng-repeat="tech in resultCtrl.allTech">
+		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="tech in resultCtrl.allTech">
+			<div class="o-tech-card"  ng-show="resultCtrl.checkZero(tech.reputation)">
 				<img src="{{tech.image}}">
 				<p>{{tech.name}}</p>
 				<div class="rating">

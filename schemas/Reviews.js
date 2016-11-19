@@ -13,7 +13,7 @@ var ReviewSchema = new mongoose.Schema({
 		name: {type: String, required: true},
 		techID: {type: mongoose.Schema.Types.ObjectId, ref: 'Technology', required: true}
 	},
-	reputation: {type: Number}
+	reputation: {type: Number, min: 0}
 });
 
 ReviewSchema.methods.upvote = function(cb) {

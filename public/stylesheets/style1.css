@@ -8,6 +8,10 @@ body {
 	background: #fafafa;
 }
 
+.d-inline-block {
+	display: inline-block;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -22,6 +26,14 @@ body {
 
 .f-s-16 {
 	font-size: 16px;
+}
+
+.f-s-12 {
+	font-size: 12px;
+}
+
+.m-b-2 {
+	margin-bottom: 2px;
 }
 
 .m-b-5 {
@@ -48,6 +60,10 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.p-b-50 {
+	padding-bottom: 50px;
+}
+
 .log-out-btn {
 	border-radius: 3px;
 	background: #337ab7;
@@ -67,6 +83,7 @@ nav {
 	float: left;
 	font-family: 'Lora', serif;
 	color: white;
+	cursor: pointer;
 	height: 50px;
 	padding: 15px 15px;
 	font-size: 25px;
@@ -89,7 +106,7 @@ nav a {
 	font-family: 'Open Sans', sans-serif;
 }
 
-nav a:hover {
+nav a:hover, nav a:visited {
 	color: white;
 }
 
@@ -260,7 +277,7 @@ nav a:hover {
 	border: 1px solid #eee;
 	display: inline-block;
 	font-family: 'Lato', sans-serif;
-	margin-top: 20px; 
+	margin-top: 35px; 
 	text-align: center;
 	transition: all 0.3s;
 }
@@ -485,6 +502,10 @@ textarea, input[placeholder="Enter Source ..."] {
 	color: #fff;
 }
 
+.upvote-btn:focus {
+	outline: none;
+}
+
 .downvote {
 	color: rgb(150,150,150);
 	font-size: 13px;
@@ -598,4 +619,62 @@ textarea, input[placeholder="Enter Source ..."] {
 
 .tech-card a:hover {
 	color: rgb(50,50,100);
+}
+
+
+/***** USER PROFILE *********/
+
+.user-profile {
+	background: white;
+	width: 100%;
+	margin: 20px auto;
+	padding: 20px 0 30px;
+	text-align: center;
+}
+
+.user-profile img {
+	width: 100px;
+}
+
+.user-profile p {
+	font-size: 22px;
+	margin-top: 10px;
+}
+
+.follow-btn {
+	background: none;
+	border-radius: 20px;
+	border: 1px solid #d82d27;
+	color: #d82d27;
+	padding: 9px 21px;
+}
+
+.follow-btn:hover {
+	background: #d82d27;
+	color: white;
+}
+
+.follow-btn:focus {
+	outline: none;
+}
+
+.img-block {
+	border-radius: 3px;
+	border: 1px solid rgb(245,245,245);
+	display: inline-block;
+	width: 20%;
+	background: white;
+	vertical-align: top;
+}
+
+.img-block img {
+	max-width: 100%;
+	padding: 15px;
+}
+
+.u-review-card {
+	width: 79%;
+	display: inline-block;
+	margin-top: 0;
+	margin-bottom: 20px;
 }

@@ -1,105 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css?family=Lora:700|Open+Sans:400,600" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="../stylesheets/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="../stylesheets/style1.css">
-  <style type="text/css">
 
-		.user-profile {
-			background: white;
-			width: 100%;
-			margin: 20px auto;
-			padding: 20px 0 30px;
-			text-align: center;
-		}
-
-		.user-profile img {
-			width: 100px;
-		}
-
-		.user-profile p {
-			font-size: 22px;
-			margin-top: 10px;
-		}
-
-		.follow-btn {
-			background: none;
-			border-radius: 20px;
-			border: 1px solid #d82d27;
-			color: #d82d27;
-			padding: 9px 21px;
-		}
-
-		.img-block {
-			display: inline-block;
-			width: 20%;
-			background: white;
-		}
-
-		.img-block img {
-			max-width: 100%;
-			padding: 15px;
-		}
-
-		.review-card {
-			width: 79%;
-			display: inline-block;
-		}
-
-	</style>
-</head>
-<body>
-
-	<nav ng-controller="NavCtrl as navCtrl" ng-hide="navCtrl.state.$current.hideNavbar">
-   <div class="container">
-      <div class="nav-logo brand">
-        Techpress
-      </div>
-      <div>
-        <ul class="pull-right">
-          <li ng-show="navCtrl.isLoggedIn()"><a href="">Shubham</a></li>
-          <li ng-show="navCtrl.isLoggedIn()"><a href="" ng-click="navCtrl.logOut()">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div class="ff-Open-Sans user-profile">
-					<img src="../images/default_user.png">
-					<p>Kartik Bansal</p>
-					<button class="follow-btn">Follow</button>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
-				<div class="img-block">
-					<img src="../images/AngularImage.png">
-				</div>
-				<div class="review-card wrapper-15">
-					<div class="review-head">
-						<p><a href="">AngularJs</a></p>
-						<div class="rating-value pull-right">
-							<span class="fa fa-star"></span> 9
-						</div>
-					</div>
-					<p class="review-title">Great Framework!</p>
-					<p class="review-body">Angular is a great framework based on MVC architecture by google that allow easy maintenance and testing of front end application. It allow us to build single page applications</p>
-					<p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">http://angularjs.org</a></p>
-				</div>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2">
+			<div class="ff-Open-Sans user-profile">
+				<img src="{{userctrl.userReviews[0].userID.image}}">
+				<p>{{userctrl.userReviews[0].userID.fullName}}</p>
+				<button class="follow-btn" ng-show="userctrl.currFlag && !userctrl.followFlag" ng-click="userctrl.addFollower(userctrl.userReviews[0].userID._id)">Follow</button>
+				<button class="follow-btn" ng-show="userctrl.currFlag && userctrl.followFlag" ng-click="userctrl.removeFollower(userctrl.userReviews[0].userID._id)">Unfollow</button>
 			</div>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-2" ng-repeat="user in userctrl.userReviews">
+			<div class="img-block">
+				<img src="{{user.technology.techID.image}}">
+			</div>
+			<div class="review-card wrapper-15 d-inline-block u-review-card">
+				<div class="review-head">
+					<p><a href="#/tech/{{user.technology.techID._id}}">{{user.technology.name}}</a></p>
+					<div class="rating-value pull-right">
+						<span class="fa fa-star"></span> {{user.review.rating}}
+					</div>
+				</div>
+				<p class="review-title">{{user.review.title}}</p>
+				<p class="review-body">{{user.review.body}}</p>
+				<p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{user.review.source}}</a></p>
+			</div>
+		</div>
+	</div>
+</div>
 
-</body>
-</html>
+
+
+
+

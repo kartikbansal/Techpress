@@ -27,7 +27,7 @@
         controller: 'AuthCtrl as authCtrl',
         hideNavbar: true,
         onEnter: ['$state', 'authService', function($state, authService){
-          if(authService.isLoggedIn()){
+          if(authService.isLoggedIn()) {
             $state.go('home');
           }
         }]
@@ -50,8 +50,8 @@
         				return response.data;
         			});
         	}],
-          flags: ['UsersService', function(UsersService) {
-            return UsersService.getUser()
+          flags: ['UserService', function(UserService) {
+            return UserService.getUser()
               .then(function(response) {
                 return response.data[0].techflag;
               });
@@ -63,6 +63,11 @@
       	url: '/post_review/{id}',
       	templateUrl: '/templates/postReview.html',
       	controller: 'PostReviewCtrl as postReviewCtrl',
+        onEnter: ['$state', 'authService', function($state, authService) {
+          if(!authService.isLoggedIn()) {
+            $state.go('login');
+          } 
+        }],
       	resolve: {
       		techItem: ['$stateParams', 'techService', function($stateParams, techService) {
       			return techService.getById($stateParams.id)
@@ -73,6 +78,21 @@
       	}
       })
 
+      .state('edit_review', {
+        url: '/edit_review/{id}',
+        templateUrl: '/templates/editReview.html',
+        controller: 'EditReviewCtrl as editReviewCtrl',
+        onEnter: ['$state', 'authService', function($state, authService) {
+          if(!authService.isLoggedIn()) {
+            $state.go('login');
+          }
+        }],
+        resolve: {
+          review: ['$stateParams', 'EditReviewService', function($stateParams, EditReviewService) {
+            return EditReviewService.getReview($stateParams.id);
+          }]
+        }
+      })
 
       .state('home', {
         url: '/home',
@@ -81,11 +101,52 @@
         onEnter: ['$state', 'authService', function($state, authService) {
           if(!authService.isLoggedIn()) {
             $state.go('login');
-          }
+          }    
         }],
         resolve: {
           reviewPromise: ['ReviewService', function(ReviewService) {
             return ReviewService.getAll();
+          }]
+        }
+      })
+
+      .state('tech', {
+        url: '/tech/{id}',
+        templateUrl: '/templates/home.html',
+        controller: 'PostReviewCtrl as postReviewCtrl',
+        onEnter: ['$state', 'authService', function($state, authService) {
+          if(!authService.isLoggedIn()) {
+            $state.go('login');
+          }
+        }],
+        resolve: {
+          reviewPromise: ['$stateParams', 'ReviewService', function($stateParams, ReviewService) {
+            return ReviewService.getAllTech($stateParams.id);
+          }]
+        }
+      })
+
+      .state('user', {
+        url: '/user/{id}',
+        templateUrl: '/templates/user.html',
+        controller: 'UserCtrl as userctrl',
+        onEnter: ['$state', 'authService', function($state, authService) {
+          if(!authService.isLoggedIn()) {
+            $state.go('login');
+          }
+        }],
+        resolve: {
+          userReviews: ['$stateParams', 'UserService', function($stateParams, UserService) {
+            return UserService.getUserDetails($stateParams.id)
+              .then(function(response) { 
+                return response.data;
+              });
+          }],
+          currentUser: ['UserService', function(UserService) {
+            return UserService.getUser()
+              .then(function(response) {
+                return response.data;
+              });
           }]
         }
       })
@@ -103,17 +164,6 @@
           allTechInfo: ['techService', function(techService) {
             return techService.getAll()
               .then(function(response) {
-                console.log(response.data);
-                return response.data;
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
-          }],
-          source: ['ReviewService', function(ReviewService) {
-            return ReviewService.getBestSource()
-              .then(function(response) {
-                console.log(response.data);
                 return response.data;
               })
               .catch(function(error) {

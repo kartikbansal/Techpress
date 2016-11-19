@@ -18,12 +18,14 @@
 <body ng-app="techpress">
   <nav ng-controller="NavCtrl as navCtrl" ng-hide="navCtrl.state.$current.hideNavbar">
    <div class="container">
-      <div class="nav-logo brand">
+      <div class="nav-logo brand" ui-sref="home">
         Techpress
       </div>
       <div>
         <ul class="pull-right">
-          <li ng-show="navCtrl.isLoggedIn()"><a href="">{{ navCtrl.currentUser() }}</a></li>
+          <li ng-show="navCtrl.isLoggedIn()"><a href="#/home">Home</a></li>
+          <li ng-show="navCtrl.isLoggedIn()"><a href="#/select_technology">Add Review</a></li>
+          <li ng-show="navCtrl.isLoggedIn()"><a href="#/user/{{ navCtrl.currentUserID() }}">My Profile</a></li>
           <li ng-show="navCtrl.isLoggedIn()"><a href="" ng-click="navCtrl.logOut()">Log Out</a></li>
         </ul>
       </div>

@@ -3,12 +3,12 @@
   var app = angular.module('techpress');
 
   app.controller("AuthCtrl", AuthCtrlFunc);
-  app.controller("MainCtrl", MainCtrlFunc);
-  app.controller("PostsCtrl", PostsCtrlFunc);
   app.controller("NavCtrl", NavCtrlFunc);
   app.controller("TechnologyCtrl", TechnologyCtrl);
   app.controller("PostReviewCtrl", PostReviewCtrl);
   app.controller("ResultCtrl", ResultCtrl);
+  app.controller("UserCtrl", UserCtrl);
+  app.controller("EditReviewCtrl", EditReviewCtrl);
 
   AuthCtrlFunc.$inject = ['$scope', '$state', 'authService', '$http', 'fbAPIService'];
   function AuthCtrlFunc($scope, $state, authService, $http, fbAPIService) {
@@ -86,28 +86,34 @@
       authService.logOut();
     }
 
-    //console.log(flags);
     technologyCtrl.check = function(item) {
       function checkitem(ele) {
         return ele === item;
       }
       return flags.find(checkitem);
-
     }
+
+    technologyCtrl.logOut = authService.logOut;
   }
 
 
 
-  PostReviewCtrl.$inject = ['ReviewService', 'techService', 'authService', '$state'];
-  function PostReviewCtrl(ReviewService, techService, authService, $state) {
+  PostReviewCtrl.$inject = ['ReviewService', 'techService', 'authService', '$state', '$stateParams', '$window'];
+  function PostReviewCtrl(ReviewService, techService, authService, $state, $stateParams, $window) {
     var postReviewCtrl = this;
+    var currUserID = authService.currentUserID();
+    postReviewCtrl.arrEle = [];
 
     postReviewCtrl.techInfo = techService.techItem[0];
 
     postReviewCtrl.score = 0;
 
     postReviewCtrl.allReviews = ReviewService.getReviews();
-    //console.log(postReviewCtrl.allReviews);
+    
+    postReviewCtrl.checkCurrUser = function(id) {
+      if(id === currUserID)
+        return true;
+    }
 
     postReviewCtrl.addReview = function() {
       if(!postReviewCtrl.title || postReviewCtrl.title === '' || !postReviewCtrl.body || postReviewCtrl.body === '' || !postReviewCtrl.source || postReviewCtrl.source === '' || postReviewCtrl.score === 0)
@@ -130,92 +136,76 @@
 
     var arrPromise = ReviewService.getCurrVotedReview();
     arrPromise.then(function(response) {
-      console.log(response.data);
       postReviewCtrl.arrEle = response.data[0].votedReview;
-      console.log(arrPromise);
-      postReviewCtrl.check = function(id) {
-        function checkitem(ele) {
-          return ele === id;
-        }
-        if(postReviewCtrl.arrEle.length !== 0)
-          return postReviewCtrl.arrEle.find(checkitem);
-        else
-          return false;
-      }
-    }).catch(function(error) {
+      }).catch(function(error) {
       console.log(error);
     });
-
-   
-
-    postReviewCtrl.checkFlag = false;
+    
+    postReviewCtrl.check = function(id) {
+      function checkitem(ele) {
+        return ele === id;
+      }
+      if(postReviewCtrl.arrEle.length !== 0)
+        return postReviewCtrl.arrEle.find(checkitem);
+      else
+        return false;
+    }
 
     postReviewCtrl.upvote = function(review) {
-      postReviewCtrl.checkFlag = ReviewService.upvote(review);
-      $state.reload('home');
+      ReviewService.upvote(review);
+      postReviewCtrl.arrEle.push(review._id);
     }
 
     postReviewCtrl.downvote = function(review) {
-      postReviewCtrl.checkFlag = ReviewService.downvote(review);
+      ReviewService.downvote(review);
+      postReviewCtrl.arrEle.push(review._id);
     }
 
   }
 
 
-
-
-  MainCtrlFunc.$inject = ['PostsService', 'authService'];
-  function MainCtrlFunc(PostsService, authService) {
-    var Ctrl1 = this;
-
-    Ctrl1.posts = PostsService.getPosts();
-
-    Ctrl1.isLoggedIn = authService.isLoggedIn;
-
-    Ctrl1.addPost = function() {
-      if(!Ctrl1.title || Ctrl1.title === '')
-        return;
-      PostsService.addPost(Ctrl1.title, Ctrl1.link);
-      Ctrl1.title = '';
-      Ctrl1.link = '';
-    }
-
-    Ctrl1.incrementUpvotes = function(post) {
-      PostsService.incrementUpvotes(post);
-    }
-  }
-
-
-
-  PostsCtrlFunc.$inject = ['PostsService', '$stateParams', 'post', 'authService'];
-  function PostsCtrlFunc(PostsService, $stateParams, post, authService) {
-    
-    var Ctrl2 = this;
-
-    Ctrl2.isLoggedIn = authService.isLoggedIn;
-
-    Ctrl2.post = post;
-
-    Ctrl2.addComment = function() {
-      if(Ctrl2.body === '') return;
-      PostsService.addComment(Ctrl2.post, Ctrl2.body);
-      Ctrl2.body = '';
-    }
-
-    Ctrl2.incrementUpvotes = function(comment) {
-      PostsService.upvoteComment(post, comment)
-    }
-
-  }
-
-
-  ResultCtrl.$inject = ['allTechInfo', 'source'];
-  function ResultCtrl(allTechInfo, source) {
+  ResultCtrl.$inject = ['allTechInfo'];
+  function ResultCtrl(allTechInfo) {
     var resultCtrl = this;
-    console.log(allTechInfo);
     resultCtrl.allTech = allTechInfo;
+
+    resultCtrl.checkZero = function(val) {
+      if(val==0)
+        return false;
+      else
+        return true;
+    }
   }
 
+  UserCtrl.$inject = ['userReviews', 'UserService', 'currentUser'];
+  function UserCtrl(userReviews, UserService, currentUser) {
+    var userctrl = this;
+    var currUserID = currentUser[0]._id;
+    var followees = currentUser[0].followees;
+    userctrl.currFlag = true;
+    userctrl.followFlag = false;
+
+
+    for(let i=0; i<followees.length; i++) {
+      if(followees[i] == userReviews[0].userID._id) {
+        userctrl.followFlag = true;
+        break;
+      }
+    }
+
+    if(currUserID === userReviews[0].userID._id) {
+      userctrl.currFlag = false;
+    }
+    userctrl.userReviews = userReviews;
+
+    userctrl.addFollower = function(id) {
+      userctrl.followFlag = UserService.addFollower(id);
+    }
+
+    userctrl.removeFollower = function(id) {
+      userctrl.followFlag = !(UserService.removeFollower(id));
+    }
+  }
 
   NavCtrlFunc.$inject = ['authService', '$state'];
   function NavCtrlFunc(authService, $state) {
@@ -223,7 +213,29 @@
     navCtrl.state = $state;
     navCtrl.isLoggedIn = authService.isLoggedIn;
     navCtrl.currentUser = authService.currentUser;
+    navCtrl.currentUserID = authService.currentUserID;
     navCtrl.logOut = authService.logOut;
+  }
+
+  EditReviewCtrl.$inject = ['EditReviewService', 'review', '$state'];
+  function EditReviewCtrl(EditReviewService, review, $state) {
+    var editReviewCtrl = this;
+    editReviewCtrl.review = review.data[0].review;
+    editReviewCtrl.techInfo = review.data[0].technology;
+    var oldRating = review.data[0].review.rating;
+    editReviewCtrl.editReview = function() {
+      if(!editReviewCtrl.review.title || editReviewCtrl.review.title === '' || !editReviewCtrl.review.body || editReviewCtrl.review.body === '' || !editReviewCtrl.review.source || editReviewCtrl.review.source === '' || editReviewCtrl.review.rating === 0)
+        return;
+
+      var promise = EditReviewService.editReviewfunc(editReviewCtrl.review.title, editReviewCtrl.review.body, editReviewCtrl.review.source, editReviewCtrl.review.rating, editReviewCtrl.techInfo.techID._id, oldRating);
+
+      promise.then(function(response) {
+        $state.go('home');
+      })
+      .catch(function(error) {
+        console.log(error)
+      });
+    }
   }
 
 })();

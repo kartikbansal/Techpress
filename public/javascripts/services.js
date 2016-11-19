@@ -4,8 +4,8 @@ app.service("authService", authService);
 app.service("fbAPIService", fbAPIService);
 app.service("techService", techService);
 app.service("ReviewService", ReviewService);
-app.service("PostsService", PostsService);
-app.service("UsersService", UsersService);
+app.service("UserService", UserService);
+app.service("EditReviewService", EditReviewService);
 
 authService.$inject = ['$http', '$window', '$state'];
 function authService($http, $window, $state) {
@@ -34,7 +34,6 @@ function authService($http, $window, $state) {
     if(auth.isLoggedIn()){
       var token = auth.getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
-      //console.log(payload);
       return payload.name;
     }
   };
@@ -43,7 +42,6 @@ function authService($http, $window, $state) {
     if(auth.isLoggedIn()){
       var token = auth.getToken();
       var payload = JSON.parse($window.atob(token.split('.')[1]));
-      //console.log(payload);
       return payload._id;
     }
   }
@@ -76,6 +74,7 @@ function authService($http, $window, $state) {
         FB.logout();
       }
       $window.localStorage.removeItem('techpress-token');
+      $window.localStorage.removeItem('first-time');
       $state.go('login');
     });
     
@@ -142,11 +141,23 @@ function ReviewService($http, authService) {
     });
   }
 
+  reviewService.getAllTech = function(id) {
+    return $http({
+      method: 'GET',
+      url: '/reviews',
+      params: {
+        techID: id
+      }
+    }).success(function(data) {
+      angular.copy(data, allReviews);
+    });
+  }
+
   reviewService.getReviews = function() {
     return allReviews;
   }
 
-  reviewService.addReview = function(title, body, source, rating,techInfo) {
+  reviewService.addReview = function(title, body, source, rating, techInfo) {
     var reviewDoc = {
       review: {
         title: title,
@@ -202,79 +213,54 @@ function ReviewService($http, authService) {
     });
   }
 
-  reviewService.getBestSource = function() {
+}
+
+EditReviewService.$inject = ['$http', 'authService'];
+function EditReviewService($http, authService) {
+  var editReview = this;
+  // var review = {};
+  // var getReview = function() {
+  //   return review;
+  // }
+  editReview.getReview = function(id) {
     return $http({
       method: 'GET',
-      url: '/best_review',
-    });
-  }
-}
-
-
-PostsService.$inject = ['$http', 'authService'];
-function PostsService($http, authService) {
-  var service = this;
-  var posts = [];
-
-  service.getAll = function() {
-    return $http.get('/posts').success(function(data) {
-      angular.copy(data, posts);
+      url: '/currreview',
+      params: {
+        userID: authService.currentUserID(),
+        techID: id
+      }
+    }).success(function(data) {
+      return data;
     });
   }
 
-  service.getPosts = function() {
-    return posts;
-  }
-
-  service.addPost = function(title, link) {
-    var post = {
-      title: title, 
-      link: link
-    }
-
-    return $http.post('/posts', post, {headers: {Authorization: 'Bearer '+ authService.getToken()}}).success(function(data) {
-      posts.push(data);
-    });
-
-  }
-
-  service.incrementUpvotes = function(post) {
-    return $http.put('/posts/' + post._id + '/upvote', null, { headers: { Authorization: 'Bearer '+ authService.getToken() }}).success(function(data) {
-      post.upvotes++;
-    });
-  }
-
-  service.getPostById = function(id) {
-    return $http.get('/posts/' + id).then(function(res) {
-      return res.data;
-    });
-  }
-
-  service.addComment = function(post, body) {
-    var comment = {
+  editReview.editReviewfunc = function(title, body, source, rating, techID, oldRating) {
+    var reviewDoc = {
+      title: title,
       body: body,
-      author: 'user'
+      source: source,
+      rating: rating,
+      id: techID, 
+      oldRating: oldRating
     }
 
-    return $http.post('/posts/' + post._id + '/comments', comment,  { headers: {Authorization: 'Bearer '+ authService.getToken() }}).success(function(comment) {
-      post.comments.push(comment);
+    var response = $http({
+      method: 'PUT',
+      url: '/currreview',
+      data: reviewDoc,
+      headers: {Authorization: 'Bearer '+ authService.getToken()}
     });
-  }
 
-  service.upvoteComment = function(post, comment) {
-    return $http.put('/posts/' + post._id + '/comments/' + comment._id + '/upvote', null,  { headers: {Authorization: 'Bearer '+ authService.getToken() }}).success(function(data) {
-      comment.upvotes++;
-    });
+    return response;
   }
-
 }
 
 
-UsersService.$inject = ['authService', '$http'];
-function UsersService(authService, $http) {
-  var usersService = this;
-  // var id = 
-  usersService.getUser = function() {
+UserService.$inject = ['authService', '$http'];
+function UserService(authService, $http) {
+  var userService = this;
+  userService.getUser = function() {
     return $http({
       method: 'GET',
       url: '/user',
@@ -283,5 +269,38 @@ function UsersService(authService, $http) {
       }
     });
   }
+
+  userService.getUserDetails = function(id) {
+    return $http({
+      method: 'GET',
+      url: '/reviews',
+      params: {
+        userID: id
+      }
+    }); 
+  }
+
+  userService.addFollower = function(id) {
+    return $http({
+      method: 'PUT',
+      url: '/user/' + id + '/follow',
+      data: null,
+      headers: {Authorization: 'Bearer '+ authService.getToken()}
+    }).success(function(data) {
+      return true;
+    });
+  }
+
+  userService.removeFollower = function(id) {
+    return $http({
+      method: 'PUT',
+      url: '/user/' + id + '/unfollow',
+      data: null,
+      headers: {Authorization: 'Bearer '+ authService.getToken()}
+    }).success(function(data) {
+      return true;
+    });
+  }
+
 }
 
