@@ -9,4 +9,4 @@ After that run 'npm start' and visit 'localhost:3000' on your browser to view th
 
 Thank you!
 
-PS: In order to login/signup using facebook create your own application on facebook and then copy and paste the app id in the file angulaApp.js which is located at /public/javascripts 
+PS: In order to add login/signup using facebook create your own application on facebook and then copy and paste the app id in the file angulaApp.js which is located at /public/javascripts 
