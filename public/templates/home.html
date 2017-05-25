@@ -2,7 +2,7 @@
 <section class="container m-t-60">
 	<div class="row">
 		<div class="col-sm-offset-1 col-sm-7">
-			<span ng-show="postReviewCtrl.bookmarks.length == 0 && postReviewCtrl.state.$current.bookmarks && postReviewCtrl.allReviews.length == 0" class="ff-Open-Sans bookmark-msg">You haven't bookmarked any Reviews yet.</span>
+			<span ng-show="postReviewCtrl.bookmarks.length == 0 && postReviewCtrl.state.$current.name == 'bookmarks' && postReviewCtrl.allReviews.length == 0" class="ff-Open-Sans bookmark-msg">You haven't bookmarked any Reviews yet.</span>
 			<article ng-repeat="review in postReviewCtrl.allReviews | orderBy:'time':true">
 			 	<div class="review-card wrapper-15 border-shadow">
 					<div class="review-head m-b-20">

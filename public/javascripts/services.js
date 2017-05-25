@@ -1,7 +1,7 @@
 var app = angular.module('techpress');
 
 app.service("authService", authService);
-// app.service("fbAPIService", fbAPIService);
+app.service("fbAPIService", fbAPIService);
 app.service("techService", techService);
 app.service("ReviewService", ReviewService);
 app.service("UserService", UserService);
@@ -59,49 +59,49 @@ function authService($http, $window, $state) {
     });
   };
 
-  // auth.fblogin = function(user) {
-  //   return $http({
-  //     method: 'POST',
-  //     url: '/fblogin',
-  //     data: user,
-  //     contentType: "application/json"}).success(function(data){
-  //     auth.saveToken(data.token);
-  //   });
-  // }
+  auth.fblogin = function(user) {
+    return $http({
+      method: 'POST',
+      url: '/fblogin',
+      data: user,
+      contentType: "application/json"}).success(function(data){
+      auth.saveToken(data.token);
+    });
+  }
 
   auth.logOut = function(){
-    // FB.getLoginStatus(function(response) {
-    //   if (response.status === 'connected') {
-    //     FB.logout();
-    //   }
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        FB.logout();
+      }
       $window.localStorage.removeItem('techpress-token');
       $window.localStorage.removeItem('first-time');
       $state.go('login');
-    // });
+    });
 
   };
 
 }
 
 
-// fbAPIService.$inject = ['$q'];
-// function fbAPIService($q) {
-//   var fbService = this;
+fbAPIService.$inject = ['$q'];
+function fbAPIService($q) {
+  var fbService = this;
 
-//   fbService.fbLogin = function() {
-//     var deferred = $q.defer();
-//     FB.api('/me', {
-//       fields: 'name, email'
-//     }, function(response) {
-//       if (!response || response.error) {
-//         deferred.reject('Error occured');
-//       } else {
-//         deferred.resolve(response);
-//       }
-//     });
-//     return deferred.promise;
-//   }
-// }
+  fbService.fbLogin = function() {
+    var deferred = $q.defer();
+    FB.api('/me', {
+      fields: 'name, email'
+    }, function(response) {
+      if (!response || response.error) {
+        deferred.reject('Error occured');
+      } else {
+        deferred.resolve(response);
+      }
+    });
+    return deferred.promise;
+  }
+}
 
 techService.$inject = ['$http', 'authService'];
 function techService($http, authService) {

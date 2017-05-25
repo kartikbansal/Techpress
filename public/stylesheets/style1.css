@@ -187,6 +187,34 @@ nav a:hover, nav a:active, nav a:focus {
 	color: #b92b27;
 }
 
+.screen-err-msg {
+	background: white;
+	display: table;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	bottom: 0;
+	z-index: 1000;
+}
+
+.screen-err-msg p{
+	background: #fff;
+	border: none;
+	display: table-cell;
+	font-family: Menlo,Monaco,Consolas,"Courier New",monospace;
+	padding: 0px;
+	width: 100%;
+	vertical-align: middle;
+}
+
+@media(min-width: 768px) {
+	.screen-err-msg {
+		display: none;
+	}
+}
+
 .bg-overlay {
 	background: url('../images/bg2.jpg') center no-repeat;
 	background-size: cover;

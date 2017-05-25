@@ -53,28 +53,28 @@ router.post('/login', function(req, res, next) {
 	})(req, res, next);
 });
 
-// router.post('/fblogin', function(req, res, next) {
+router.post('/fblogin', function(req, res, next) {
 
-// 	if(!req.body.email) {
-// 		return res.status(400).json({message: 'Please fill out all fields'});
-// 	}
+	if(!req.body.email) {
+		return res.status(400).json({message: 'Please fill out all fields'});
+	}
 
-// 	User.findOne({email: req.body.email}, function(err, user) {
-// 		if(user) {
-// 			return res.json({token: user.generateJWT()});
-// 		}
-// 		else {
-// 			var user = new User();
-// 			user.email = req.body.email;
-// 			user.fullName = req.body.fullName;
-// 			user.save(function(err) {
-// 				if(err) return next(err);
+	User.findOne({email: req.body.email}, function(err, user) {
+		if(user) {
+			return res.json({token: user.generateJWT()});
+		}
+		else {
+			var user = new User();
+			user.email = req.body.email;
+			user.fullName = req.body.fullName;
+			user.save(function(err) {
+				if(err) return next(err);
 
-// 				return res.json({token: user.generateJWT()});
-// 			});
-// 		}
-// 	});
-// });
+				return res.json({token: user.generateJWT()});
+			});
+		}
+	});
+});
 
 
 

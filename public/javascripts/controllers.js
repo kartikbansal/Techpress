@@ -11,8 +11,8 @@
   app.controller("EditReviewCtrl", EditReviewCtrl);
   app.controller("ReviewCtrl", ReviewCtrl);
 
-  AuthCtrlFunc.$inject = ['$scope', '$state', 'authService', '$http'];
-  function AuthCtrlFunc($scope, $state, authService, $http) {
+  AuthCtrlFunc.$inject = ['$scope', '$state', 'authService', '$http', 'fbAPIService'];
+  function AuthCtrlFunc($scope, $state, authService, $http, fbAPIService) {
     var authCtrl = this;
 
     authCtrl.user = {};
@@ -33,45 +33,45 @@
       });
     };
 
-    // authCtrl.fbLogin = function() {
-    //   FB.getLoginStatus(function(response) {
-    //     if(response.status !== "connected") {
-    //       FB.login(function(response) {
-    //         if (response.authResponse) {
-    //           fbAPIService.fbLogin()
-    //           .then(function(response) {
-    //             var newuser = {
-    //               email : response.email,
-    //               fullName : response.name
-    //             };
-    //             authService.fblogin(newuser).error(function(error) {
-    //               authCtrl.error = error;
-    //             }).then(function() {
-    //               $state.go('select_technology');
-    //             });
-    //           });
-    //         } else {
-    //           console.log('User cancelled login or did not fully authorize.');
-    //         }
-    //       });
-    //     } else {
-    //       if(response.status==="connected") {
-    //         fbAPIService.fbLogin()
-    //         .then(function(response) {
-    //           var newuser = {
-    //             email : response.email,
-    //             fullName : response.name
-    //           };
-    //           authService.fblogin(newuser).error(function(error) {
-    //             authCtrl.error = error;
-    //           }).then(function() {
-    //             $state.go('select_technology');
-    //           });
-    //         });
-    //       }
-    //     }
-    //   });
-    // }
+    authCtrl.fbLogin = function() {
+      FB.getLoginStatus(function(response) {
+        if(response.status !== "connected") {
+          FB.login(function(response) {
+            if (response.authResponse) {
+              fbAPIService.fbLogin()
+              .then(function(response) {
+                var newuser = {
+                  email : response.email,
+                  fullName : response.name
+                };
+                authService.fblogin(newuser).error(function(error) {
+                  authCtrl.error = error;
+                }).then(function() {
+                  $state.go('select_technology');
+                });
+              });
+            } else {
+              console.log('User cancelled login or did not fully authorize.');
+            }
+          });
+        } else {
+          if(response.status==="connected") {
+            fbAPIService.fbLogin()
+            .then(function(response) {
+              var newuser = {
+                email : response.email,
+                fullName : response.name
+              };
+              authService.fblogin(newuser).error(function(error) {
+                authCtrl.error = error;
+              }).then(function() {
+                $state.go('select_technology');
+              });
+            });
+          }
+        }
+      });
+    }
   }
 
 
