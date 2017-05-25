@@ -17,7 +17,7 @@ Open your terminal and enter following commands
     cd Techpress
     npm install
 
-**Note**: Since you'll be running this app locally, therefore some data needs to be inserted in mongodb before running the app. In order to do that open new terminal window enter the following commands
+**Note:** Since you'll be running this app locally, therefore some data needs to be inserted in mongodb before running the app. In order to do that open new terminal window enter the following commands
 
     mongo
     use techpress
