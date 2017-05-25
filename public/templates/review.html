@@ -1,0 +1,40 @@
+<div>
+  <section class="bg-white p-t-50 p-b-50">
+    <div class="m-container ff-Open-Sans">
+      <div class="user-block">
+        <img ng-src="{{reviewCtrl.info.userID.image}}" alt="{{reviewCtrl.info.userID.fullName}}" />
+        <p class="d-inline-block f-s-15">
+          <a ng-href="#/user/{{reviewCtrl.info.userID._id}}">{{reviewCtrl.info.userID.fullName}}</a> in <a ng-href="#/tech/{{reviewCtrl.info.technology.techID._id}}">{{reviewCtrl.info.technology.name}}</a> <br />
+          <span class="f-s-12">{{reviewCtrl.info.time | date:"MMM d, y @ h:mm a"}}</span>
+        </p>
+      </div>
+      <div class="post-block m-t-20">
+        <p class="review-body" ng-bind-html="reviewCtrl.info.review.body"></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="m-container">
+    <div class="comments-block m-t-50">
+      <h4>Comments</h4>
+      <form class="m-t-20 m-b-20 bg-white border-shadow p-15" ng-submit="reviewCtrl.addComment()">
+        <textarea placeholder="Add your Comment here..." ng-model="reviewCtrl.comment"></textarea>
+        <input type="submit" class="m-btn-1">
+      </form>
+      <div class="comment-block bg-white border-shadow p-15 m-b-20" ng-repeat="comment in reviewCtrl.info.comments | orderBy: '-time'">
+        <div class="s-user-block">
+          <img src="../images/default_user.png" alt="username" />
+          <p class="d-inline-block">
+            {{comment.user.name}} <br />
+            <span class="f-s-12">{{comment.time | date:"MMM d, y @ h:mm a"}}</span>
+          </p>
+        </div>
+        <div class="s-post-block">
+          <p>
+            {{comment.body}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

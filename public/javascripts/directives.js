@@ -3,7 +3,7 @@ var app = angular.module('techpress');
 app.directive("rating", ratingDirective);
 
 function ratingDirective() {
-	
+
 	var ddo = {
 		restrict: 'AE',
 		scope: {
@@ -46,3 +46,17 @@ function ratingDirective() {
 
 	return ddo;
 }
+
+
+// function allTechDirective() {
+// 	var ddo = {
+// 		restrict: 'AE',
+// 		scope: {},
+// 		controller: TechnologyCtrl,
+// 		bindToController: true,
+// 		controllerAs: 'technologyCtrl',
+// 		templateUrl: '/templates/allTech.html'
+// 	};
+//
+// 	return ddo;
+// }

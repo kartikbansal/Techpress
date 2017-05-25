@@ -1,8 +1,16 @@
 
 <section class="container m-t-60">
 	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="tech in resultCtrl.allTech">
-			<div class="o-tech-card"  ng-show="resultCtrl.checkZero(tech.reputation)">
+		<div class="m-b-20 ff-Open-Sans p-15" style="padding-top: 5px; padding-bottom: 0">
+			<span class="b-tag b-tag-w d-inline-block m-b-10 link-cursor-pointer" ng-repeat="tag in resultCtrl.allTags" ng-click="resultCtrl.getTagResult(tag, $index)" ng-class="{'b-tag-r': resultCtrl.checkTag(tag)}">{{tag}}</span>
+		</div>
+		<div ng-show="resultCtrl.msg">
+			<p class="r-msg ff-Open-Sans">
+				Sorry, no results are available
+			</p>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-3" ng-repeat="tech in resultCtrl.allTech | orderBy: 'totalWeight'" ng-show="resultCtrl.checkZero(tech.reputation)">
+			<div class="o-tech-card">
 				<img ng-src="{{tech.image}}">
 				<p>{{tech.name}}</p>
 				<div class="rating">
@@ -12,15 +20,3 @@
 		</div>
 	</div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-

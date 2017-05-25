@@ -5,16 +5,17 @@
   <form class="m-t-20 homeSignupForm" ng-submit="authCtrl.register()">
     <a href="" class="fb-login" ng-click="authCtrl.fbLogin()"><span class="fa fa-facebook-official"></span><span>Continue with Facebook</span></a>
     <p>or Continue with email below</p>
+    <span class="err-msg">{{ authCtrl.error }}</span>
     <div class="form-group">
       <input type="name" placeholder="Full Name" required class="m-form-control" ng-model="authCtrl.user.fullName">
-    </div> 
+    </div>
     <div class="form-group">
       <input type="email" placeholder="Email" required class="m-form-control" ng-model="authCtrl.user.email">
-    </div> 
+    </div>
     <div class="form-group">
-      <input type="password" placeholder="Password" required class="m-form-control" ng-model="authCtrl.user.password">   
+      <input type="password" placeholder="Password" required class="m-form-control" ng-model="authCtrl.user.password">
     </div>
     <button type="submit" class="btn btn-danger">Sign up</button>
     <span class="disclaimer">Already have an account? <a href="/#/login">Signin here</a></span>
   </form>
-</main> 
+</main>

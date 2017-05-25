@@ -8,6 +8,12 @@ body {
 	background: #fafafa;
 }
 
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 700;
+	color: rgb(50,50,50);
+}
+
 .d-inline-block {
 	display: inline-block;
 }
@@ -28,6 +34,14 @@ body {
 	font-size: 16px;
 }
 
+.f-s-15 {
+	font-size: 15px;
+}
+
+.f-s-13 {
+	font-size: 13px;
+}
+
 .f-s-12 {
 	font-size: 12px;
 }
@@ -40,8 +54,16 @@ body {
 	margin-bottom: 5px;
 }
 
+.m-b-10 {
+	margin-bottom: 10px;
+}
+
 .m-t-20 {
 	margin-top: 20px;
+}
+
+.m-b-20 {
+	margin-bottom: 20px;
 }
 
 .m-t-50 {
@@ -56,12 +78,60 @@ body {
 	margin-top: 60px;
 }
 
+.m-t-10 {
+	margin-top: 10px;
+}
+
 .ff-Open-Sans {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.p-t-50 {
+	padding-top: 50px;
+}
+
+.p-15 {
+	padding: 15px;
+}
+
 .p-b-50 {
 	padding-bottom: 50px;
+}
+
+.floatLeft {
+	float: left;
+}
+
+.floatRight {
+	float: right;
+}
+
+.m-editor-block {
+	display: block;
+	margin-bottom: 35px;
+	font-size: 16px;
+}
+
+.err-msg {
+	color: red;
+	font-size: 16px;
+	font-weight: 'Lato', sans-serif;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.button-set {
+	float: right;
+	margin-top: 7px;
+}
+
+.button-set a {
+	color: rgb(75,75,75);
+}
+
+.button-set a:hover {
+	color: rgb(20,20,20);
+	text-decoration: none;
 }
 
 .log-out-btn {
@@ -76,13 +146,15 @@ body {
 }
 
 nav {
-	background: #b92b27;
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+  box-shadow: 0 2px 1px -4px rgb(200, 200, 200);
 }
 
 .nav-logo {
 	float: left;
 	font-family: 'Lora', serif;
-	color: white;
+	color: #b92b27;
 	cursor: pointer;
 	height: 50px;
 	padding: 15px 15px;
@@ -102,12 +174,17 @@ nav li {
 }
 
 nav a {
-	color: white;
+	color: rgb(150,150,150);
 	font-family: 'Open Sans', sans-serif;
 }
 
-nav a:hover, nav a:visited {
-	color: white;
+nav a:hover, nav a:active, nav a:focus {
+	text-decoration: none;
+	color: #b92b27;
+}
+
+.color-red {
+	color: #b92b27;
 }
 
 .bg-overlay {
@@ -133,6 +210,7 @@ nav a:hover, nav a:visited {
 }
 
 .logo-text {
+	border: none;
 	border-radius: 5px 5px 0 0;
 	color: white;
 	font-family: 'Lora', serif;
@@ -240,13 +318,13 @@ nav a:hover, nav a:visited {
 .homeSignupForm ::-webkit-input-placeholder {
   color: rgb(100,100,100);
 }
-.homeSignupForm ::-moz-placeholder { 
+.homeSignupForm ::-moz-placeholder {
   color: rgb(100,100,100);
 }
-.homeSignupForm :-ms-input-placeholder { 
+.homeSignupForm :-ms-input-placeholder {
   color: rgb(100,100,100);
 }
-.homeSignupForm :-moz-placeholder { 
+.homeSignupForm :-moz-placeholder {
   color: rgb(100,100,100);
 }
 
@@ -272,12 +350,12 @@ nav a:hover, nav a:visited {
 /********* TECH CARD  *************/
 
 .tech-card {
-	background: #fff; 
+	background: #fff;
 	border-radius: 4px;
 	border: 1px solid #eee;
 	display: inline-block;
 	font-family: 'Lato', sans-serif;
-	margin-top: 35px; 
+	margin-top: 35px;
 	text-align: center;
 	transition: all 0.3s;
 }
@@ -297,7 +375,7 @@ nav a:hover, nav a:visited {
 
 .tech-card a {
 	background: #e9e9e9;
-	border-radius: 0 0 4px 4px; 
+	border-radius: 0 0 4px 4px;
 	color: rgb(50,50,50);
 	display: block;
 	font-size: 14px;
@@ -339,7 +417,7 @@ nav a:hover, nav a:visited {
 .m-btn-1 {
 	background: none;
 	border-radius: 20px;
-	border: 1px solid #d82d27; 
+	border: 1px solid #d82d27;
 	color: #d82d27;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 15px;
@@ -347,6 +425,11 @@ nav a:hover, nav a:visited {
 	outline: none;
 	padding: 8px 25px;
 	transition: all 0.2s;
+}
+
+.comments-block .m-btn-1 {
+	font-size: 14px;
+	padding: 7px 22px;
 }
 
 .m-btn-1:hover {
@@ -397,17 +480,17 @@ input[placeholder="Title"]::-webkit-input-placeholder {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
-input[placeholder="Title"]::-moz-placeholder { 
+input[placeholder="Title"]::-moz-placeholder {
   color: rgb(130,130,130);
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
-input[placeholder="Title"]:-ms-input-placeholder { 
+input[placeholder="Title"]:-ms-input-placeholder {
   color: rgb(130,130,130);
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
 }
-input[placeholder="Title"]:-moz-placeholder { 
+input[placeholder="Title"]:-moz-placeholder {
   color: rgb(130,130,130);
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
@@ -425,14 +508,13 @@ textarea, input[placeholder="Enter Source ..."] {
 
 .review-card {
 	border-radius: 3px;
-	border: 1px solid rgb(245,245,245);
-	background: white; 
+	background: white;
 	font-family: 'Open Sans', sans-serif;
-	margin-top: 10px;
+	margin-bottom: 30px;
 }
 
 .review-head {
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 
 .review-head img {
@@ -443,7 +525,6 @@ textarea, input[placeholder="Enter Source ..."] {
 	display: inline-block;
 	font-size: 15px;
 	font-family: 'Lato', sans-serif;
-	margin-left: 5px;
 	margin-bottom: 0;
 	vertical-align: middle;
 }
@@ -466,8 +547,27 @@ textarea, input[placeholder="Enter Source ..."] {
 }
 
 .review-body {
+	color: black;
+	display: inline;
 	font-size: 16px;
 	word-wrap: break-word;
+}
+
+.review-body > last-child {
+	display: inline;
+}
+
+.more-link {
+	margin-top: 15px;
+}
+
+.more-link a {
+	color: rgb(100,100,100);
+}
+
+.more-link a:hover {
+	color: rgb(50,50,50);
+	text-decoration: none;
 }
 
 .rating-value {
@@ -484,6 +584,17 @@ textarea, input[placeholder="Enter Source ..."] {
 
 .review-footer {
 	margin-top: 25px;
+}
+
+.review-footer:after {
+	clear: both;
+	content: "";
+	display: table;
+}
+
+.review-footer:before {
+	display: table;
+	content: "";
 }
 
 .upvote-btn {
@@ -529,10 +640,18 @@ textarea, input[placeholder="Enter Source ..."] {
 	border: 1px solid rgb(245,245,245);
 	font-size: 14px;
 	text-align: center;
-	padding: 60px 25px;
-	margin-top: 10px;
+	padding: 15px 25px;
+	margin-bottom: 30px;
 	cursor: pointer;
 	background: white;
+}
+
+.fa-star-o {
+	color: #888;
+}
+
+.fa-star-o:hover {
+	color: #ffe11b;
 }
 
 
@@ -545,6 +664,7 @@ textarea, input[placeholder="Enter Source ..."] {
 
 .rating > a {
   text-decoration: none;
+	color: #ffe11b;
 }
 
 .rating .rating-highlight, .rating.rating-highlight:hover {
@@ -559,12 +679,12 @@ textarea, input[placeholder="Enter Source ..."] {
 /******* 	RESULT 	********/
 
 .o-tech-card {
-	background: #fff; 
+	background: #fff;
 	border-radius: 4px;
 	border: 1px solid #eee;
 	display: inline-block;
 	font-family: 'Lato', sans-serif;
-	margin-bottom: 20px; 
+	margin-bottom: 20px;
 	text-align: center;
 	transition: all 0.3s;
 	width: 100%;
@@ -606,7 +726,7 @@ textarea, input[placeholder="Enter Source ..."] {
 .source a {
 	padding-bottom: 10px;
 	font-size: 18px;
-	display: inline-block; 		
+	display: inline-block;
 }
 
 .tech-card a:hover, .tech-card a:link, .tech-card a:visited, .tech-card a:active {
@@ -660,7 +780,6 @@ textarea, input[placeholder="Enter Source ..."] {
 
 .img-block {
 	border-radius: 3px;
-	border: 1px solid rgb(245,245,245);
 	display: inline-block;
 	width: 20%;
 	background: white;
@@ -676,5 +795,185 @@ textarea, input[placeholder="Enter Source ..."] {
 	width: 79%;
 	display: inline-block;
 	margin-top: 0;
-	margin-bottom: 20px;
+}
+
+
+/**** GENERAL '+' SINGLE POST CSS****/
+
+.bg-white {
+	background: #fff;
+}
+
+.user-block img {
+	border-radius: 50%;
+	width: 70px;
+}
+
+.user-block p {
+	margin-bottom: 0;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+
+.user-block p a {
+	color: rgb(60,60,60);
+}
+
+.user-block p a:hover {
+	text-decoration: none;
+	color: rgb(0,0,0);
+}
+
+.user-block span {
+	color: grey;
+}
+
+.comments-block h4 {
+	color: rgb(100,100,100);
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.border-shadow {
+	box-shadow: 0 1px 4px rgba(0,0,0,.04);
+	border: 1px solid rgba(0,0,0,.09);
+}
+
+.s-user-block img {
+	border-radius: 50%;
+	width: 55px;
+}
+
+.s-user-block p {
+	margin-bottom: 0;
+	margin-left: 15px;
+	vertical-align: middle;
+}
+
+.s-user-block span {
+	color: grey;
+}
+
+.s-post-block p {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+/**** SMALL TECH CARD ****/
+.s-tech-card img {
+	height: 40px;
+	width: 40px;
+	vertical-align: top;
+}
+
+.s-tech-card p {
+	font-size: 15px;
+	margin-bottom: 0;
+	margin-left: 5px;
+}
+
+.s-tech-card p a {
+	color: #777;
+	text-decoration: none;
+}
+
+.s-tech-card p a:hover {
+	text-decoration: underline;
+}
+
+.s-tech-card p span {
+	color: #777;
+	font-size: 14px;
+	margin-top: 2px;
+}
+
+.s-tech-card button {
+	font-size: 13px;
+	margin-left: 0px;
+	margin-top: 2px;
+	padding: 7px 20px;
+  vertical-align: text-bottom;
+}
+
+.link-accent {
+	color: #d82d27;
+}
+
+.link-accent:hover {
+	text-decoration: none;
+	color: #d82d27;
+}
+
+.link-bullet:before {
+	content: '• ';
+	font-size: 18px;
+}
+
+.link-cursor-pointer {
+	cursor: pointer;
+}
+
+.fa-bookmark-o, .fa-bookmark {
+	margin-left: 10px;
+	font-size: 16px;
+	vertical-align: bottom;
+	color: #555;
+}
+
+.fa-bookmark {
+	color: #000;
+}
+
+.bookmark-msg {
+	margin-top: 3px;
+  display: block;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+}
+
+.tag {
+	background: #f5f5f5;
+	border-radius: 3px;
+	color: #777;
+	font-size: 12px;
+	margin-right: 6px;
+	padding: 6px 10px;
+}
+
+.tag:hover {
+	background: #e5e5e5;
+	color: #666;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.b-tag {
+
+	border-radius: 3px;
+
+	font-size: 14px;
+	margin-right: 8px;
+	padding: 6px 15px;
+}
+
+.b-tag-w {
+	background: white;
+	color: #777;
+}
+
+.b-tag-r {
+	background: #d82d27;
+	color: #fff;
+}
+
+.b-tag:hover {
+	background: #d82d27;
+	color: #fff;
+}
+
+.r-msg {
+	color: rgb(130,130,130);
+	font-size: 16px;
+	padding-left: 15px;
 }

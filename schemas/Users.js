@@ -11,14 +11,14 @@ var UserSchema = new mongoose.Schema({
 	salt: String,
 	followersCount: {default: 0, type: Number},
 	followees: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-	techflag: [String],
-	votedReview: [{type:mongoose.Schema.Types.ObjectId, ref:'Review'}],
-	firstLogin: {type: Boolean, default: true}
+	votedReview: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
+	techFollow: [{type: mongoose.Schema.Types.ObjectId, ref: 'Technology'}],
+	bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}]
 });
 
 UserSchema.methods.setPassword = function(password) {
 	this.salt = crypto.randomBytes(16).toString('hex');
-	this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex'); 
+	this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64).toString('hex');
 };
 
 UserSchema.methods.validPassword = function(password) {

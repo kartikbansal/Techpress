@@ -1,11 +1,18 @@
 <section class="m-container">
-	<div class="wrapper-25  m-t-50 m-b-50">
+	<div class="wrapper-25  m-t-50 m-b-50 border-shadow">
 		<div class="tech-intro">
 			<img ng-src="{{editReviewCtrl.techInfo.techID.image}}">
 			<p>{{editReviewCtrl.techInfo.name}}<span>Write your Review</span></p>
 		</div>
-		<form class="review-form" ng-submit="editReviewCtrl.editReview()">
-			<div class="m-form-group">
+		<div class="m-form-group">
+			<!-- <input type="text" placeholder="Tags" required ng-model="postReviewCtrl.tags"> -->
+			<div class="m-t-10">
+				<span class="tag d-inline-block" ng-repeat="tag in editReviewCtrl.tags">{{tag}}</span>
+			</div>
+		</div>
+		<form class="review-form">
+			<medium-editor ng-model="editReviewCtrl.review.body" bind-options="editReviewCtrl.options" class="m-editor-block"></medium-editor>
+			<!-- <div class="m-form-group">
 				<input type="text" placeholder="Title" required ng-model="editReviewCtrl.review.title">
 			</div>
 			<div class="m-form-group">
@@ -13,14 +20,12 @@
 			</div>
 			<div class="m-form-group">
 				<input type="text" placeholder="Enter Source ..." required ng-model="editReviewCtrl.review.source">
-			</div>
+			</div> -->
+
 			<div class="m-form-group">
 				<rating score="editReviewCtrl.review.rating" max="10"></rating>
 			</div>
-			<button type="submit" class="m-btn-1">Submit</button>
-		</form> 
+			<button type="button" class="m-btn-1" ng-click="editReviewCtrl.editReview()">Submit</button>
+		</form>
 	</div>
 </section>
-
-
-

@@ -2,35 +2,41 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-8 col-sm-offset-2">
-			<div class="ff-Open-Sans user-profile">
-				<img ng-src="{{userctrl.userReviews[0].userID.image}}">
-				<p>{{userctrl.userReviews[0].userID.fullName}}</p>
-				<button class="follow-btn" ng-show="userctrl.currFlag && !userctrl.followFlag" ng-click="userctrl.addFollower(userctrl.userReviews[0].userID._id)">Follow</button>
-				<button class="follow-btn" ng-show="userctrl.currFlag && userctrl.followFlag" ng-click="userctrl.removeFollower(userctrl.userReviews[0].userID._id)">Unfollow</button>
+			<div class="ff-Open-Sans user-profile border-shadow">
+				<img ng-src="{{userctrl.selectedUser.image}}">
+				<p>{{userctrl.selectedUser.fullName}}</p>
+				<button class="follow-btn" ng-show="userctrl.currFlag && !userctrl.followFlag" ng-click="userctrl.addFollower(userctrl.selectedUser._id)">Follow</button>
+				<button class="follow-btn" ng-show="userctrl.currFlag && userctrl.followFlag" ng-click="userctrl.removeFollower(userctrl.selectedUser._id)">Unfollow</button>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2" ng-repeat="user in userctrl.userReviews">
-			<div class="img-block">
-				<img ng-src="{{user.technology.techID.image}}">
-			</div>
-			<div class="review-card wrapper-15 d-inline-block u-review-card">
-				<div class="review-head">
-					<p><a href="#/tech/{{user.technology.techID._id}}">{{user.technology.name}}</a></p>
+		<article ng-repeat="review in userctrl.userReviews | orderBy:'time':true" class="col-sm-8 col-sm-offset-2">
+			<div class="review-card wrapper-15 border-shadow" style="margin-bottom: 20px">
+				<div class="review-head m-b-20">
+					<img ng-src="{{review.technology.techID.image}}" style="width: 35px;">
+					<p style="margin-left: 5px;">
+						<a href="#/tech/{{review.technology.techID._id}}">{{review.technology.name}}</a>
+						<br /> <span class="f-s-12">{{review.time | date:"MMM d, y @ h:mm a"}}</span>
+					</p>
 					<div class="rating-value pull-right">
-						<span class="fa fa-star"></span> {{user.review.rating}}
+						<span class="fa fa-star"></span> {{review.review.rating}}
+					</div>
+					<div class="m-t-20">
+						<span class="tag" ng-repeat="tag in review.tags">{{tag}}</span>
 					</div>
 				</div>
-				<p class="review-title">{{user.review.title}}</p>
-				<p class="review-body">{{user.review.body}}</p>
-				<p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{user.review.source}}</a></p>
+				<!-- <p class="review-title">{{review.review.title}}</p> -->
+				<div class="review-body" ng-bind-html="userctrl.formatContent(review.review.body)"></div>
+				<!-- <div class="review-body" ng-bind-html="review.review.body | limitTo: 300"></div>
+				<span ng-show="{{review.review.body.length > 300}}">. . .</span> -->
+				<div class="more-link" ng-show="{{review.review.body.length > 300}}"><a href="#/review/{{review._id}}" class="f-s-13">Read more...</a></div>
+				<!-- <p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{review.review.source}}</a></p> -->
+				<div class="review-footer" ng-show="userctrl.checkCurrUser(userctrl.selectedUser._id)">
+					<a href="#/edit_review/{{review.technology.techID._id}}" class="link-cursor-pointer link-accent ff-Open-Sans m-b-5">Edit Review <span style="margin-left: 3px; font-size: 16px; vertical-align: bottom">&#8594;</span></a>
+				</div>
 			</div>
-		</div>
+		</article>
 	</div>
+
 </div>
-
-
-
-
-

@@ -7,11 +7,11 @@
 			<div class="tech-card">
 				<img ng-src="{{item.image}}">
 				<p>{{item.name}}</p>
-				<a href="#/post_review/{{item._id}}" ng-if="!technologyCtrl.check(item.name)">+ Add Review</a>
-				<a href="#/edit_review/{{item._id}}" ng-if="technologyCtrl.check(item.name)">Edit Review</a>
+				<!-- <a href="#/post_review/{{item._id}}/{{$index}}" ng-if="!technologyCtrl.check(item.name)">+ Add Review</a>
+				<a href="#/edit_review/{{item._id}}" ng-if="technologyCtrl.check(item.name)">Edit Review</a> -->
+				<a href="#/post_review/{{item._id}}/{{$index}}">+ Add Review</a>
+
 			</div>
 		</div>
 	</div>
 </div>
-
-

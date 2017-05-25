@@ -4,16 +4,16 @@ var ReviewSchema = new mongoose.Schema({
 	userID: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true},
 	time: {type: Date, default: Date.now},
 	review: {
-		title: {type: String, required: true},
 		body: {type: String, required: true},
-		source: {type: String, required: true},
 		rating: {type: Number, required: true}
 	},
 	technology: {
 		name: {type: String, required: true},
 		techID: {type: mongoose.Schema.Types.ObjectId, ref: 'Technology', required: true}
 	},
-	reputation: {type: Number, min: 0}
+	tags: [{type: String, required: true}],
+	reputation: {type: Number, min: 0},
+	comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
 });
 
 ReviewSchema.methods.upvote = function(cb) {

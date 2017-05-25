@@ -1,40 +1,72 @@
 
 <section class="container m-t-60">
 	<div class="row">
-		<div class="col-sm-8">
-			<div class="review-card wrapper-15" ng-repeat="review in postReviewCtrl.allReviews | orderBy: 'time'">
-				<div class="review-head">
-					<img ng-src="{{review.userID.image}}">
-					<p><a href="#/user/{{review.userID._id}}">{{review.userID.fullName}}</a> in <a href="#/tech/{{review.technology.techID._id}}">{{review.technology.name}}</a></p>
-					<div class="rating-value pull-right">
-						<span class="fa fa-star"></span> {{review.review.rating}}
+		<div class="col-sm-offset-1 col-sm-7">
+			<span ng-show="postReviewCtrl.bookmarks.length == 0 && postReviewCtrl.state.$current.bookmarks && postReviewCtrl.allReviews.length == 0" class="ff-Open-Sans bookmark-msg">You haven't bookmarked any Reviews yet.</span>
+			<article ng-repeat="review in postReviewCtrl.allReviews | orderBy:'time':true">
+			 	<div class="review-card wrapper-15 border-shadow">
+					<div class="review-head m-b-20">
+						<img ng-src="{{review.userID.image}}">
+						<p>
+							<a href="#/user/{{review.userID._id}}">{{review.userID.fullName}}</a>&nbsp; posted in &nbsp;<a href="#/tech/{{review.technology.techID._id}}">{{review.technology.name}}</a>
+							<br /> <span class="f-s-12">{{review.time | date:"MMM d, y @ h:mm a"}}</span>
+						</p>
+						<div class="rating-value pull-right">
+							<span class="fa fa-star"></span> {{review.review.rating}}
+						</div>
+						<div class="m-t-10">
+							<a class="tag" ng-repeat="tag in review.tags" href=#/home/{{tag}}>{{tag}}</a>
+						</div>
+					</div>
+					<!-- <p class="review-title">{{review.review.title}}</p> -->
+					<div class="review-body" ng-bind-html="postReviewCtrl.formatContent(review.review.body)"></div>
+					<!-- <div class="review-body" ng-bind-html="review.review.body | limitTo: 300"></div>
+					<span ng-show="{{review.review.body.length > 300}}">. . .</span> -->
+					<div class="more-link" ng-show="{{review.review.body.length > 300}}"><a href="#/review/{{review._id}}" class="f-s-13">Read more...</a></div>
+					<!-- <p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{review.review.source}}</a></p> -->
+					<div class="review-footer">
+						<div ng-hide="postReviewCtrl.checkCurrUser(review.userID._id)" class="floatLeft" style="width: 75%">
+							<button class="upvote-btn" ng-hide="postReviewCtrl.check(review._id, postReviewCtrl.arrEle)" ng-click="postReviewCtrl.upvote(review, $index)">Upvote</button>
+							<a href="" class="downvote" ng-hide="postReviewCtrl.check(review._id, postReviewCtrl.arrEle)" ng-click="postReviewCtrl.downvote(review)">Downvote</a>
+							<p ng-hide="!postReviewCtrl.check(review._id, postReviewCtrl.arrEle)" class="msg d-inline-block">Thank you for your vote! Your vote help us to provide more authentic results regarding particular technology.</p>
+						</div>
+						<div class="button-set f-s-13">
+							<a href="#/review/{{review._id}}">{{review.comments.length}} <span ng-show="{{review.comments.length != 1}}">Comments</span><span ng-show="{{review.comments.length == 1}}">Comment</span></a>
+							<span class="fa fa-bookmark-o link-cursor-pointer" ng-click="postReviewCtrl.addBookmark(review._id)" ng-hide="postReviewCtrl.check(review._id, postReviewCtrl.bookmarks)"></span>
+							<span class="fa fa-bookmark link-cursor-pointer" ng-click="postReviewCtrl.removeBookmark(review._id)" ng-hide="!postReviewCtrl.check(review._id, postReviewCtrl.bookmarks)"></span>
+						</div>
 					</div>
 				</div>
-				<p class="review-title">{{review.review.title}}</p>
-				<p class="review-body">{{review.review.body}}</p>
-				<p class="review-body">Check out the following <strong>Source</strong><br /><a href="{{review.review.source}}">{{review.review.source}}</a></p>
-				<div class="review-footer" ng-hide="postReviewCtrl.checkCurrUser(review.userID._id)">
-					<button class="upvote-btn" ng-hide="postReviewCtrl.check(review._id)" ng-click="postReviewCtrl.upvote(review, $index)">Upvote</button>
-					<a href="" class="downvote" ng-hide="postReviewCtrl.check(review._id)" ng-click="postReviewCtrl.downvote(review)">Downvote</a>
-					<p ng-hide="!postReviewCtrl.check(review._id)" class="msg">Thank you for your vote! Your vote help us to provide more authentic results regarding particular technology.</p>
-				</div>
-			</div>
+			</article>
 		</div>
-		<div class="col-sm-4">
-			<div class="box ff-Open-Sans" ui-sref="results">
-				Generate the summarized result of all technologies displaying their effective rating
+		<div class="col-sm-3">
+			<div class="link-cursor-pointer link-accent link-bullet ff-Open-Sans m-b-5" ui-sref="results">
+				Effective rating of all Technologies <span style="margin-left: 3px; font-size: 16px; vertical-align: bottom">&#8594;</span>
 			</div>
-			<div class="box ff-Open-Sans" ui-sref="select_technology">
-				Add more Reviews
+			<div class="link-cursor-pointer link-accent link-bullet ff-Open-Sans m-b-5" ui-sref="home2" ng-hide="postReviewCtrl.state.$current.allPosts || (postReviewCtrl.techFollow.length <= 2 && postReviewCtrl.followees.length == 0)">
+				View All Reviews <span style="margin-left: 3px; font-size: 16px; vertical-align: bottom">&#8594;</span>
 			</div>
+			<div class="link-cursor-pointer link-accent link-bullet ff-Open-Sans m-b-5" ui-sref="home" ng-show="postReviewCtrl.state.$current.allPosts && (postReviewCtrl.techFollow.length > 2 || postReviewCtrl.followees.length !== 0)">
+				View Customized Feeds <span style="margin-left: 3px; font-size: 16px; vertical-align: bottom">&#8594;</span>
+			</div>
+			<div class="link-cursor-pointer link-accent link-bullet ff-Open-Sans m-b-5" ui-sref="topten">
+				This week's top ten reviews <span style="margin-left: 3px; font-size: 16px; vertical-align: bottom">&#8594;</span>
+			</div>
+			<section class="m-b-20">
+				<h5 style="margin-bottom: 5px" class="m-t-20">Technologies</h5>
+				<span class="ff-Open-Sans d-inline-block" style="font-size: 12px; color: #666;" ng-show="postReviewCtrl.techFollow.length <= 2">Customize your feeds by following atleast 3 technologies</span>
+				<span style="height: 1px; width: 100%; margin-top: 10px; background: #ccc" class="d-inline-block"></span>
+				<div class="s-tech-card m-t-20" ng-repeat="tech in postReviewCtrl.allTechInfo">
+					<img ng-src="{{tech.image}}"/>
+					<p class="ff-Open-Sans d-inline-block">
+						{{tech.name}} <br />
+						<span ng-show="tech.totalReviews > 0"><a href="#/tech/{{tech._id}}">{{tech.totalReviews}} reviews</a> <br /></span>
+						<a target="_blank" href="{{tech.docLink}}" class="d-inline-block">View docs/guide</a>
+					</p>
+					<button class="follow-btn ff-Open-Sans pull-right" ng-hide="postReviewCtrl.check(tech._id, postReviewCtrl.techFollow)" ng-click="postReviewCtrl.addFollower(tech._id)">Follow</button>
+					<button class="follow-btn ff-Open-Sans pull-right" ng-show="postReviewCtrl.check(tech._id, postReviewCtrl.techFollow)" ng-click="postReviewCtrl.removeFollower(tech._id)" style="margin-right: -8px; color: white; background: #d82d27">Unfollow</button>
+				</div>
+			</section>
 		</div>
 	</div>
 </section>
-
-
-
-
-
-
-
-

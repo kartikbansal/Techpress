@@ -1,0 +1,120 @@
+*:focus {
+    outline: none;
+}
+
+/*@font-face {
+    font-family: 'ProximaNovaBlack';
+    src: url('http://dfimg.com/fonts/proximanova-black-webfont.eot');
+    src: url('http://dfimg.com/fonts/proximanova-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://dfimg.com/fonts/proximanova-black-webfont.woff') format('woff'),
+         url('http://dfimg.com/fonts/proximanova-black-webfont.ttf') format('truetype'),
+         url('http://dfimg.com/fonts/proximanova-black-webfont.svg#ProximaNovaBlack') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNovaRegular';
+    src: url('http://dfimg.com/fonts/proximanova-regular-webfont.eot');
+    src: url('http://dfimg.com/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://dfimg.com/fonts/proximanova-regular-webfont.woff') format('woff'),
+         url('http://dfimg.com/fonts/proximanova-regular-webfont.ttf') format('truetype'),
+         url('http://dfimg.com/fonts/proximanova-regular-webfont.svg#ProximaNovaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: ProximaNovaRegular, Helvetica, Arial, sans-serif;
+    font-size: 22px;
+    line-height: 30px;
+}*/
+
+#container {
+    width: 960px;
+    margin: 30px auto;
+}
+
+h1 {
+    font-family: ProximaNovaBlack, Helvetica, Arial, sans-serif;
+    font-size: 60px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    letter-spacing: -2px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+p {
+    margin-bottom: 30px;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+b {
+    font-weight: bolder
+}
+
+.review-body a {
+  color: black;
+  text-decoration: underline;
+}
+
+.review-body a:hover {
+  color: black;
+}
+
+.m-editor-block a {
+  color: black;
+  text-decoration: underline;
+}
+
+.m-editor-block a:hover {
+  color: black;
+}
+
+pre {
+  font-size: 15px;
+  padding: 15px;
+}
+
+blockquote {
+    display: block;
+    padding-left: 20px;
+    border-left: 6px solid #df0d32;
+}
+
+.editable {
+    outline: none;
+    margin: 0 0 20px 0;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+
+#container {
+    width: 960px;
+    margin: 30px auto;
+}
+
+h3 {
+    font-size: 32px;
+    line-height: initial;
+}
+
+h4 {
+    font-size: 26px;
+    line-height: initial;
+}
+
+
+blockquote {
+    border-left: 3px solid #555;
+    margin-left: -10px;
+    padding-left: 13px;
+    font-style: italic;
+    color: #555;
+}
