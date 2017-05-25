@@ -59,25 +59,25 @@ function authService($http, $window, $state) {
     });
   };
 
-  auth.fblogin = function(user) {
-    return $http({
-      method: 'POST',
-      url: '/fblogin',
-      data: user,
-      contentType: "application/json"}).success(function(data){
-      auth.saveToken(data.token);
-    });
-  }
+  // auth.fblogin = function(user) {
+  //   return $http({
+  //     method: 'POST',
+  //     url: '/fblogin',
+  //     data: user,
+  //     contentType: "application/json"}).success(function(data){
+  //     auth.saveToken(data.token);
+  //   });
+  // }
 
   auth.logOut = function(){
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        FB.logout();
-      }
+    // FB.getLoginStatus(function(response) {
+    //   if (response.status === 'connected') {
+    //     FB.logout();
+    //   }
       $window.localStorage.removeItem('techpress-token');
       $window.localStorage.removeItem('first-time');
       $state.go('login');
-    });
+    // });
 
   };
 
