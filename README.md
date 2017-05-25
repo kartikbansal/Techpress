@@ -43,7 +43,7 @@ Now visit ```localhost:3000``` on your browser.
 
 **Note:** Since this app is running locally, therefore there'll be no data. You have to register and enter the data by yourself. **Please add atleast one review/article at the beginning for proper functioning**  
 
-**Disclaimer:** In order to add login/signup functoinality using [facebook](https://developers.facebook.com/) create your own application on facebook and then copy and paste the **app id** at **line 290** in the file ```angularApp.js``` which is located at ```/public/javascripts```. After that follow the steps below
+**Disclaimer:** In order to add login/signup functoinality using facebook create your own application on [facebook](https://developers.facebook.com/) and then copy and paste the **app id** at **line 290** in the file ```angularApp.js``` which is located at ```/public/javascripts```. After that follow the steps below
 + In file ```/public/javascripts/angularApp.js``` uncomment all code from **line 288 to line 304**
 + In file ```/public/javascripts/services.js``` uncomment all code from **line 62 to line 80**
 
