@@ -3,12 +3,12 @@ An online collaborative platform that allow users to share information and learn
 computer languages and frameworks. It delivers content in the form of reviews written by the users only.  
 
 ## Pre-requisites
----
+
 1. MongoDB
 2. Nodejs
 
 ## To run:
----
+
     git clone https://github.com/kartikbansal/Techpress.git
     cd Techpress
     npm install
