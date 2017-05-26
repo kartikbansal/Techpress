@@ -3,14 +3,14 @@ An online collaborative platform that allow users to share information and learn
 computer languages and frameworks. It delivers content in the form of reviews written by the users only.  
 The site is live [here](http://ec2-35-154-211-190.ap-south-1.compute.amazonaws.com:8080/#/login). (This site has not been made responsive. **Please view it on larger screens only.** Also login/signup with facebook is **inactive** in live version).
 
-# To run on local machine
+## To run on local machine
 
-## Pre-requisites:
+### Pre-requisites:
 
 1. [MongoDB](https://www.mongodb.com/)
 2. [Nodejs](https://nodejs.org/en/)
 
-## To run:
+### To run:
 
 Open your terminal and enter following commands
 
