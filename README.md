@@ -1,16 +1,16 @@
 # Techpress
 An online collaborative platform that allow users to share information and learn about varoius
 computer languages and frameworks. It delivers content in the form of reviews written by the users only.  
-The site is live (here)[http://ec2-35-154-211-190.ap-south-1.compute.amazonaws.com:8080/#/login]. (This site has not been made responsive. **Please view it on larger screens only.** Also login/signup with facebook is **inactive** in live version)
+The site is live [here](http://ec2-35-154-211-190.ap-south-1.compute.amazonaws.com:8080/#/login). (This site has not been made responsive. **Please view it on larger screens only.** Also login/signup with facebook is **inactive** in live version).
 
-## Pre-requisites
+## To run locally
+
+### Pre-requisites
 
 1. [MongoDB](https://www.mongodb.com/)
-2. [Nodejs](https://nodejs.org/en/)
+2. [Nodejs](https://nodejs.org/en/) 
 
-Note: Since you'll be running this app locally, therefore some data needs to be inserted in mongodb before running the app. In order to do that  
-
-## To run:
+### To run:
 
 Open your terminal and enter following commands
 
