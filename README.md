@@ -1,7 +1,6 @@
 # Techpress
 An online collaborative platform that allow users to share information and learn about varoius
 computer languages and frameworks. It delivers content in the form of reviews written by the users only.  
-The site is live [here](http://ec2-35-154-211-190.ap-south-1.compute.amazonaws.com:8080/#/login). (This site has not been made responsive. **Please view it on larger screens only.** Also login/signup with facebook is **inactive** in live version).
 
 ## To run on local machine
 
